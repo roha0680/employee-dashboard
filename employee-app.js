@@ -4,15 +4,14 @@ let filteredEmployees = [];
 
 // Initialize dashboard
 function init() {
-    loadDataFromJSON();
+    loadDataFromVariable();
 }
 
-// Load data from JSON file
-async function loadDataFromJSON() {
+// Load data from embedded variable
+function loadDataFromVariable() {
     try {
-        const response = await fetch('employee-data.json');
-        if (response.ok) {
-            const data = await response.json();
+        if (typeof EMPLOYEE_DATA !== 'undefined' && EMPLOYEE_DATA.length > 0) {
+            const data = EMPLOYEE_DATA;
             employees = data.map(item => ({
                 employeeId: item.employeeId || item.EmployeeID || item['Employee ID'] || '',
                 rackerName: item.rackerName || item.RackerName || item['Racker Name'] || '',
@@ -27,20 +26,15 @@ async function loadDataFromJSON() {
                 basePay: parseFloat(String(item.basePayUSD || item.basePay || item.BasePay || item['Base Pay (USD)'] || item['Base Pay'] || 0).replace(/[$,]/g, '')) || 0
             }));
             filteredEmployees = [...employees];
-            renderEmployees(filteredEmployees);
-            updateSummary();
-            populateFilters();
-            setupEventListeners();
         } else {
-            console.log('No employee-data.json found, starting with empty data');
             loadSampleData();
-            renderEmployees(filteredEmployees);
-            updateSummary();
-            populateFilters();
-            setupEventListeners();
         }
+        renderEmployees(filteredEmployees);
+        updateSummary();
+        populateFilters();
+        setupEventListeners();
     } catch (error) {
-        console.log('Error loading employee-data.json:', error);
+        console.log('Error loading employee data:', error);
         loadSampleData();
         renderEmployees(filteredEmployees);
         updateSummary();
