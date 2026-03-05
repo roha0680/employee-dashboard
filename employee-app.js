@@ -16,12 +16,35 @@ async function loadDefaultData() {
         loadingMsg.textContent = 'Loading employee data from GitHub...';
         loadingMsg.style.background = '#667eea';
         
-        // Use GitHub's media URL which serves the actual file content
-        const response = await fetch('https://media.githubusercontent.com/media/roha0680/employee-dashboard/main/employee-data.json');
-        if (!response.ok) {
-            throw new Error('Failed to load data (HTTP ' + response.status + ')');
+        // Try multiple URLs in case one fails
+        const urls = [
+            'https://raw.githubusercontent.com/roha0680/employee-dashboard/main/employee-data.json',
+            'https://media.githubusercontent.com/media/roha0680/employee-dashboard/main/employee-data.json',
+            './employee-data.json'
+        ];
+        
+        let data = null;
+        let lastError = null;
+        
+        for (const url of urls) {
+            try {
+                console.log('Trying URL:', url);
+                const response = await fetch(url);
+                if (response.ok) {
+                    data = await response.json();
+                    console.log('Successfully loaded from:', url);
+                    break;
+                }
+            } catch (err) {
+                console.log('Failed to load from:', url, err.message);
+                lastError = err;
+            }
         }
-        const data = await response.json();
+        
+        if (!data) {
+            throw lastError || new Error('Failed to load data from all URLs');
+        }
+        
         console.log('Data loaded successfully:', data.length, 'employees');
         
         employees = data.map(item => ({
