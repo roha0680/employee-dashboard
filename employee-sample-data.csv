@@ -1,0 +1,9 @@
+employeeId,rackerName,manager,jobProfile,podRacker,tenure,workShift,country,legacyCompany,costCentre,basePay
+EMP001,John Smith,Sarah Johnson,Technical Support Engineer,POD-A,3.5,Day,USA,Rackspace,CC-1001,75000
+EMP002,Maria Garcia,Sarah Johnson,Senior Support Engineer,POD-A,5.2,Night,Mexico,Rackspace,CC-1001,85000
+EMP003,David Chen,Michael Brown,Enterprise Operations Lead,POD-B,7.8,Day,Singapore,Legacy Corp,CC-2001,95000
+EMP004,Emily Wilson,Michael Brown,Commercial Operations Specialist,POD-B,2.1,Evening,UK,Rackspace,CC-2001,72000
+EMP005,Ahmed Hassan,Sarah Johnson,Technical Support Engineer,POD-C,4.3,Day,UAE,Legacy Corp,CC-1001,78000
+EMP006,Lisa Anderson,Robert Taylor,Senior Operations Engineer,POD-C,6.5,Night,USA,Rackspace,CC-3001,88000
+EMP007,Carlos Rodriguez,Robert Taylor,Technical Support Engineer,POD-A,1.8,Evening,Spain,Legacy Corp,CC-3001,70000
+EMP008,Priya Patel,Michael Brown,Enterprise Operations Specialist,POD-B,3.9,Day,India,Rackspace,CC-2001,65000

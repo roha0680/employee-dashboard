@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Acme Corporation",
+    "mrr": 5000,
+    "devices": 45,
+    "contractExpiry": "2026-08-15"
+  },
+  {
+    "name": "TechStart Inc",
+    "mrr": 2500,
+    "devices": 20,
+    "contractExpiry": "2026-04-20"
+  },
+  {
+    "name": "Global Solutions",
+    "mrr": 8500,
+    "devices": 120,
+    "contractExpiry": "2026-12-01"
+  }
+]
