@@ -249,8 +249,6 @@ function setupEventListeners() {
     document.getElementById('legacyFilter').addEventListener('change', applyFilters);
     document.getElementById('costCentreFilter').addEventListener('change', applyFilters);
     document.getElementById('resetFiltersBtn').addEventListener('click', resetFilters);
-    document.getElementById('uploadBtn').addEventListener('click', handleFileUpload);
-    document.getElementById('clearDataBtn').addEventListener('click', clearData);
 }
 
 // Handle file upload
