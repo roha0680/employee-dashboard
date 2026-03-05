@@ -4,6 +4,9 @@ let filteredEmployees = [];
 
 // Initialize dashboard
 function init() {
+    console.log('Dashboard initializing...');
+    console.log('EMPLOYEE_DATA available:', typeof EMPLOYEE_DATA !== 'undefined');
+    console.log('EMPLOYEE_DATA length:', typeof EMPLOYEE_DATA !== 'undefined' ? EMPLOYEE_DATA.length : 0);
     loadDataFromVariable();
 }
 
@@ -11,22 +14,25 @@ function init() {
 function loadDataFromVariable() {
     try {
         if (typeof EMPLOYEE_DATA !== 'undefined' && EMPLOYEE_DATA.length > 0) {
+            console.log('Loading', EMPLOYEE_DATA.length, 'employees');
             const data = EMPLOYEE_DATA;
             employees = data.map(item => ({
-                employeeId: item.employeeId || item.EmployeeID || item['Employee ID'] || '',
-                rackerName: item.rackerName || item.RackerName || item['Racker Name'] || '',
-                manager: item.manager || item.Manager || '',
-                jobProfile: item.jobProfile || item.JobProfile || item['Job Profile'] || '',
-                podRacker: item.podRacker || item.PODRacker || item['POD Racker'] || '',
-                tenure: parseFloat(item.tenure || item.Tenure) || 0,
-                workShift: item.workShift || item.WorkShift || item['Work Shift'] || '',
-                country: item.country || item.Country || '',
-                legacyCompany: item.legacyCompany || item.LegacyCompany || item['Legacy Company'] || '',
-                costCentre: item.costCentre || item.CostCentre || item['Cost Centre'] || '',
-                basePay: parseFloat(String(item.basePayUSD || item.basePay || item.BasePay || item['Base Pay (USD)'] || item['Base Pay'] || 0).replace(/[$,]/g, '')) || 0
+                employeeId: item.employeeId || '',
+                rackerName: item.rackerName || '',
+                manager: item.manager || '',
+                jobProfile: item.jobProfile || '',
+                podRacker: item.podRacker || '',
+                tenure: parseFloat(item.tenure) || 0,
+                workShift: item.workShift || '',
+                country: item.country || '',
+                legacyCompany: item.legacyCompany || '',
+                costCentre: item.costCentre || '',
+                basePay: parseFloat(item.basePayUSD) || 0
             }));
             filteredEmployees = [...employees];
+            console.log('Processed', employees.length, 'employees');
         } else {
+            console.log('No EMPLOYEE_DATA found, loading sample data');
             loadSampleData();
         }
         renderEmployees(filteredEmployees);
@@ -34,7 +40,7 @@ function loadDataFromVariable() {
         populateFilters();
         setupEventListeners();
     } catch (error) {
-        console.log('Error loading employee data:', error);
+        console.error('Error loading employee data:', error);
         loadSampleData();
         renderEmployees(filteredEmployees);
         updateSummary();
