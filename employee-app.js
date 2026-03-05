@@ -24,7 +24,7 @@ async function loadDataFromJSON() {
                 country: item.country || item.Country || '',
                 legacyCompany: item.legacyCompany || item.LegacyCompany || item['Legacy Company'] || '',
                 costCentre: item.costCentre || item.CostCentre || item['Cost Centre'] || '',
-                basePay: parseFloat(String(item.basePay || item.BasePay || item['Base Pay (USD)'] || item['Base Pay'] || 0).replace(/[$,]/g, '')) || 0
+                basePay: parseFloat(String(item.basePayUSD || item.basePay || item.BasePay || item['Base Pay (USD)'] || item['Base Pay'] || 0).replace(/[$,]/g, '')) || 0
             }));
             filteredEmployees = [...employees];
             renderEmployees(filteredEmployees);
