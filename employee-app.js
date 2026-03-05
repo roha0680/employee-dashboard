@@ -10,8 +10,12 @@ function init() {
 
 // Auto-load default data on page load
 async function loadDefaultData() {
+    const loadingMsg = document.getElementById('loadingMessage');
     try {
         console.log('Loading employee data from GitHub...');
+        loadingMsg.textContent = 'Loading employee data from GitHub...';
+        loadingMsg.style.background = '#667eea';
+        
         // Use GitHub's media URL which serves the actual file content
         const response = await fetch('https://media.githubusercontent.com/media/roha0680/employee-dashboard/main/employee-data.json');
         if (!response.ok) {
@@ -36,6 +40,10 @@ async function loadDefaultData() {
         filteredEmployees = [...employees];
         console.log('Processed', employees.length, 'employees');
         
+        loadingMsg.textContent = `✓ Data loaded successfully! (${employees.length} employees)`;
+        loadingMsg.style.background = '#2ecc71';
+        setTimeout(() => loadingMsg.style.display = 'none', 3000);
+        
         renderEmployees(filteredEmployees);
         updateSummary();
         populateFilters();
@@ -43,7 +51,11 @@ async function loadDefaultData() {
     } catch (error) {
         console.error('Error loading employee data:', error);
         if (window.location.protocol === 'file:') {
-            console.log('Local testing: Upload file manually or use a local server');
+            loadingMsg.textContent = 'ℹ Local testing: Please use a web server or upload file manually';
+            loadingMsg.style.background = '#f39c12';
+        } else {
+            loadingMsg.textContent = '⚠ Could not auto-load data: ' + error.message;
+            loadingMsg.style.background = '#e74c3c';
         }
         loadSampleData();
         renderEmployees(filteredEmployees);
