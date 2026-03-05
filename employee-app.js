@@ -4,11 +4,49 @@ let filteredEmployees = [];
 
 // Initialize dashboard
 function init() {
-    loadSampleData();
-    renderEmployees(filteredEmployees);
-    updateSummary();
-    populateFilters();
-    setupEventListeners();
+    loadDataFromJSON();
+}
+
+// Load data from JSON file
+async function loadDataFromJSON() {
+    try {
+        const response = await fetch('employee-data.json');
+        if (response.ok) {
+            const data = await response.json();
+            employees = data.map(item => ({
+                employeeId: item.employeeId || item.EmployeeID || item['Employee ID'] || '',
+                rackerName: item.rackerName || item.RackerName || item['Racker Name'] || '',
+                manager: item.manager || item.Manager || '',
+                jobProfile: item.jobProfile || item.JobProfile || item['Job Profile'] || '',
+                podRacker: item.podRacker || item.PODRacker || item['POD Racker'] || '',
+                tenure: parseFloat(item.tenure || item.Tenure) || 0,
+                workShift: item.workShift || item.WorkShift || item['Work Shift'] || '',
+                country: item.country || item.Country || '',
+                legacyCompany: item.legacyCompany || item.LegacyCompany || item['Legacy Company'] || '',
+                costCentre: item.costCentre || item.CostCentre || item['Cost Centre'] || '',
+                basePay: parseFloat(String(item.basePay || item.BasePay || item['Base Pay (USD)'] || item['Base Pay'] || 0).replace(/[$,]/g, '')) || 0
+            }));
+            filteredEmployees = [...employees];
+            renderEmployees(filteredEmployees);
+            updateSummary();
+            populateFilters();
+            setupEventListeners();
+        } else {
+            console.log('No employee-data.json found, starting with empty data');
+            loadSampleData();
+            renderEmployees(filteredEmployees);
+            updateSummary();
+            populateFilters();
+            setupEventListeners();
+        }
+    } catch (error) {
+        console.log('Error loading employee-data.json:', error);
+        loadSampleData();
+        renderEmployees(filteredEmployees);
+        updateSummary();
+        populateFilters();
+        setupEventListeners();
+    }
 }
 
 // Load sample data

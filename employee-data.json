@@ -1,0 +1,41 @@
+[
+  {
+    "employeeId": "EMP001",
+    "rackerName": "John Smith",
+    "manager": "Sarah Johnson",
+    "jobProfile": "Technical Support Engineer",
+    "podRacker": "POD-A",
+    "tenure": 3.5,
+    "workShift": "Day",
+    "country": "USA",
+    "legacyCompany": "Rackspace",
+    "costCentre": "CC-1001",
+    "basePay": 75000
+  },
+  {
+    "employeeId": "EMP002",
+    "rackerName": "Maria Garcia",
+    "manager": "Sarah Johnson",
+    "jobProfile": "Senior Support Engineer",
+    "podRacker": "POD-A",
+    "tenure": 5.2,
+    "workShift": "Night",
+    "country": "Mexico",
+    "legacyCompany": "Rackspace",
+    "costCentre": "CC-1001",
+    "basePay": 85000
+  },
+  {
+    "employeeId": "EMP003",
+    "rackerName": "David Chen",
+    "manager": "Michael Brown",
+    "jobProfile": "Enterprise Operations Lead",
+    "podRacker": "POD-B",
+    "tenure": 7.8,
+    "workShift": "Day",
+    "country": "Singapore",
+    "legacyCompany": "Legacy Corp",
+    "costCentre": "CC-2001",
+    "basePay": 95000
+  }
+]
