@@ -5,42 +5,46 @@ let filteredEmployees = [];
 // Initialize dashboard
 function init() {
     console.log('Dashboard initializing...');
-    console.log('EMPLOYEE_DATA available:', typeof EMPLOYEE_DATA !== 'undefined');
-    console.log('EMPLOYEE_DATA length:', typeof EMPLOYEE_DATA !== 'undefined' ? EMPLOYEE_DATA.length : 0);
-    loadDataFromVariable();
+    loadDefaultData();
 }
 
-// Load data from embedded variable
-function loadDataFromVariable() {
+// Auto-load default data on page load
+async function loadDefaultData() {
     try {
-        if (typeof EMPLOYEE_DATA !== 'undefined' && EMPLOYEE_DATA.length > 0) {
-            console.log('Loading', EMPLOYEE_DATA.length, 'employees');
-            const data = EMPLOYEE_DATA;
-            employees = data.map(item => ({
-                employeeId: item.employeeId || '',
-                rackerName: item.rackerName || '',
-                manager: item.manager || '',
-                jobProfile: item.jobProfile || '',
-                podRacker: item.podRacker || '',
-                tenure: parseFloat(item.tenure) || 0,
-                workShift: item.workShift || '',
-                country: item.country || '',
-                legacyCompany: item.legacyCompany || '',
-                costCentre: item.costCentre || '',
-                basePay: parseFloat(item.basePayUSD) || 0
-            }));
-            filteredEmployees = [...employees];
-            console.log('Processed', employees.length, 'employees');
-        } else {
-            console.log('No EMPLOYEE_DATA found, loading sample data');
-            loadSampleData();
+        console.log('Loading employee data from GitHub...');
+        // Use GitHub's media URL which serves the actual file content
+        const response = await fetch('https://media.githubusercontent.com/media/roha0680/employee-dashboard/main/employee-data.json');
+        if (!response.ok) {
+            throw new Error('Failed to load data (HTTP ' + response.status + ')');
         }
+        const data = await response.json();
+        console.log('Data loaded successfully:', data.length, 'employees');
+        
+        employees = data.map(item => ({
+            employeeId: item.employeeId || '',
+            rackerName: item.rackerName || '',
+            manager: item.manager || '',
+            jobProfile: item.jobProfile || '',
+            podRacker: item.podRacker || '',
+            tenure: parseFloat(item.tenure) || 0,
+            workShift: item.workShift || '',
+            country: item.country || '',
+            legacyCompany: item.legacyCompany || '',
+            costCentre: item.costCentre || '',
+            basePay: parseFloat(item.basePayUSD) || 0
+        }));
+        filteredEmployees = [...employees];
+        console.log('Processed', employees.length, 'employees');
+        
         renderEmployees(filteredEmployees);
         updateSummary();
         populateFilters();
         setupEventListeners();
     } catch (error) {
         console.error('Error loading employee data:', error);
+        if (window.location.protocol === 'file:') {
+            console.log('Local testing: Upload file manually or use a local server');
+        }
         loadSampleData();
         renderEmployees(filteredEmployees);
         updateSummary();
