@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OS Services Ent/Comm Org</title>
+    <link rel="stylesheet" href="employee-styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OS Services Ent/Comm Org</h1>
+            <p class="subtitle">Technical Support Enterprise Operations & Commercial Operations</p>
+            
+            <div id="loadingMessage" style="padding: 15px; background: #667eea; color: white; border-radius: 6px; margin-bottom: 20px; text-align: center;">
+                Loading employee data...
+            </div>
+            
+            <div class="summary">
+                <div class="summary-card">
+                    <span class="label">Total Employees</span>
+                    <span class="value" id="totalEmployees">0</span>
+                </div>
+                <div class="summary-card">
+                    <span class="label">Total Base Pay (USD)</span>
+                    <span class="value" id="totalBasePay">$0</span>
+                </div>
+                <div class="summary-card">
+                    <span class="label">Average Tenure</span>
+                    <span class="value" id="avgTenure">0 years</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="filters-section">
+            <h3>Filters</h3>
+            <div class="filters">
+                <input type="text" id="searchInput" placeholder="Search by name or ID...">
+                
+                <select id="managerFilter" multiple size="1">
+                    <option value="">All Managers</option>
+                </select>
+                
+                <select id="podFilter">
+                    <option value="">All POD Rackers</option>
+                </select>
+                
+                <select id="shiftFilter">
+                    <option value="">All Work Shifts</option>
+                </select>
+                
+                <select id="countryFilter">
+                    <option value="">All Countries</option>
+                </select>
+                
+                <select id="legacyFilter">
+                    <option value="">All Legacy Companies</option>
+                </select>
+                
+                <select id="costCentreFilter" multiple size="1">
+                    <option value="">All Cost Centres</option>
+                </select>
+                
+                <button id="resetFiltersBtn">Reset Filters</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="employeeTable">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Racker Name</th>
+                        <th>Manager</th>
+                        <th>Job Profile</th>
+                        <th>POD Racker</th>
+                        <th>Tenure</th>
+                        <th>Work Shift</th>
+                        <th>Country</th>
+                        <th>Legacy Company</th>
+                        <th>Cost Centre</th>
+                        <th>Base Pay (USD)</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="employee-app.js"></script>
+</body>
+</html>
